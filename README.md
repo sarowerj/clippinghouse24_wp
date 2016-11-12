@@ -1,1 +1,3 @@
-# clippinghouse24_wp
+# Clipping House 24
+
+# clippinghouse24 wordpress version.
