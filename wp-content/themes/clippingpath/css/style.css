@@ -1,0 +1,92 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 16, 2016, 2:17:26 PM
+    Author     : Sarower Jahan
+*/
+
+.pi-row-lg .pi-row-block-logo img{
+    max-height:97px;
+}
+
+.pi-btn-base.pi-btn-no-border,
+.pi-scroll-top-arrow:hover{
+    background:#046ba2;
+    border-color:#62a9d4;
+    border-top-color:#62a9d4;
+}
+.pi-icon-base,
+.pi-caption-icon, 
+.pi-section-white .pi-counter-line .pi-counter-progress, 
+.pi-section-parallax .pi-counter-line .pi-counter-progress,
+.pi-section-white .pi-counter-line.pi-slave .pi-counter-progress, 
+.pi-section-parallax .pi-counter-line.pi-slave .pi-counter-progress,
+.pi-bullets-base li .pi-bullet-icon, 
+.pi-bullets-base li .pi-bullet-icon-img,
+.pi-slider-page-active{
+    background:#046ba2;
+}
+.pi-section-dark a,
+.pi-section-white .pi-simple-menu > li:hover > a,
+.pi-icon-box .pi-icon-box-icon.pi-icon-box-icon-base,
+.pi-icon-box-vertical .pi-icon-box-icon.pi-icon-box-icon-base,
+.pi-section-white a,
+.pi-section-dark h1 a.pi-link-no-style:hover, 
+.pi-section-dark .h1 a.pi-link-no-style:hover,
+.pi-section-dark h2 a.pi-link-no-style:hover, 
+.pi-section-dark .h2 a.pi-link-no-style:hover,
+.pi-section-dark h3 a.pi-link-no-style:hover,
+.pi-section-dark .h3 a.pi-link-no-style:hover,
+.pi-section-dark h4 a.pi-link-no-style:hover, 
+.pi-section-dark .h4 a.pi-link-no-style:hover,
+.pi-section-dark h5 a.pi-link-no-style:hover, 
+.pi-section-dark .h5 a.pi-link-no-style:hover, 
+.pi-section-dark h6 a.pi-link-no-style:hover, 
+.pi-section-dark .h6 a.pi-link-no-style:hover,
+.pi-section-parallax a{
+    color:#64a9d5;
+}
+.pi-section-white .pi-simple-menu.pi-has-hover-border > li:hover > a > span:before,
+.pi-border-bottom-strong-base{
+    border-color:#64a9d5;
+}
+.pi-caption-icon:hover{
+    background:#62a9d4;
+}
+.pi-text-base{
+    color:#64a9d5 !important;
+}
+.pi-section-overlay-base{
+    background: rgba(0, 0,0, 0.5);
+} 
+
+
+
+.values .pi-icon-box .pi-icon-box-icon.pi-icon-box-icon-base{
+    color:white;
+}
+
+.inner_page.pricing .pi-pricing tr:nth-child(odd) td{
+    background:#f8f8f8;
+}
+.inner_page.pricing .pi-pricing tr td{
+    text-align:center;
+}
+.inner_page.pricing .pi-pricing tr td.pi-text-center{
+    background:#0dc0c0;
+    color:white;
+}
+.inner_page.pricing .pi-text-center .pi-pricing-amount{
+    color:white;
+}
+.inner_page.pricing .pi-pricing .btn{
+    background:#0dc0c0;
+    color:white;
+}
+
+.footer .message_fld{
+    height:90px;
+}
