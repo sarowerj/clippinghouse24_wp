@@ -90,3 +90,11 @@ and open the template in the editor.
 .footer .message_fld{
     height:90px;
 }
+
+
+.pi-img-overlay{
+    padding:10px;
+}
+.team_members .item img{
+    height:auto;
+}

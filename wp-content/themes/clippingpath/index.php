@@ -77,7 +77,10 @@ get_header();
 
                     <div class="pi-icon-box pi-icon-box-hover">
                         <div class="pi-icon-box-icon pi-icon-box-icon-base">
-                            <i class="icon-credit-card"></i>
+                            <?php
+                                $icon = get_post_meta($post->ID, 'class_name', true);
+                            ?>
+                            <i class="<?=($icon!='')?$icon:'icon-clock'; ?>"></i>
                         </div>
 
                         <div class="pi-icon-box-content">
@@ -178,6 +181,188 @@ get_header();
 <!-- - - - - - - - - - END SECTION - - - - - - - - - -->
 
 
+
+
+<!-- - - - - - - - - - SECTION - - - - - - - - - -->
+
+<div class="pi-section-w pi-section-white">
+    <div class="pi-section pi-padding-bottom-30">
+
+        <!-- Row -->
+        <div class="pi-row pi-padding-bottom-10">	
+
+            <!-- Col 6 -->
+            <div class="pi-col-sm-6 pi-padding-bottom-40">
+
+                <h2 class="h4 pi-weight-700 pi-uppercase pi-letter-spacing pi-has-bg pi-margin-bottom-20">
+                    Who We Are
+                </h2>
+
+                <p class="lead-24 pi-weight-300">
+                    <em>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus autem</em>
+                </p>
+
+                <p>
+                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
+                    eligendi optio cumque nihil impedit quo facilis est et expedita distinctio minus id quod maxime placeat facere possimus, omnis voluptas
+                    assumenda est, <a href="#">omnis dolor repellendus</a>. Temporibus autem cum soluta nobis est
+                    eligendi quibusdam et aut officiis debitis autem cum soluta nobis est aut optio cumque nihil.
+                </p>
+
+            </div>
+            <!-- End col 6 -->
+
+            <!-- Col 6 -->
+            <div class="pi-col-sm-6 pi-padding-bottom-40">
+
+                <h2 class="h4 pi-weight-700 pi-uppercase pi-letter-spacing pi-has-bg pi-margin-bottom-30">
+                    We Are Good At
+                </h2>
+
+                <!-- Progress bar -->
+                <div class="pi-counter pi-counter-line pi-slave" data-counter-type="line" data-count-from="0" data-count-to="85" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+
+                    <div class="pi-counter-count">
+                        <p><i class="icon-globe pi-icon-left"></i>Global Communication</p>
+                        <div class="pi-counter-progress pi-bar-four"></div>
+                    </div>
+
+                </div>
+                <!-- End progress bar -->
+
+                <!-- Progress bar -->
+                <div class="pi-counter pi-counter-line" data-counter-type="line" data-count-from="0" data-count-to="85" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+
+                    <div class="pi-counter-count">
+                        <p><i class="icon-pencil pi-icon-left"></i>Clipping Path</p>
+                        <div class="pi-counter-progress pi-bar-one"></div>
+                    </div>
+
+                </div>
+                <!-- End progress bar -->
+
+                <!-- Progress bar -->
+                <div class="pi-counter pi-counter-line" data-counter-type="line" data-count-from="0" data-count-to="95" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+
+                    <div class="pi-counter-count">
+                        <p><i class="icon-pencil pi-icon-left"></i>Retouch</p>
+                        <div class="pi-counter-progress pi-bar-two"></div>
+                    </div>
+
+                </div>
+                <!-- End progress bar -->
+
+                <!-- Progress bar -->
+                <div class="pi-counter pi-counter-line pi-slave" data-counter-type="line" data-count-from="0" data-count-to="98" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+
+                    <div class="pi-counter-count">
+                        <p><i class="icon-air pi-icon-left"></i>Layer and Hair Masking</p>
+                        <div class="pi-counter-progress pi-bar-three"></div>
+                    </div>
+
+                </div>
+                <!-- End progress bar -->
+
+            </div>
+            <!-- End col 6 -->
+
+        </div>
+        <!-- End row -->
+
+        <h2 class="h4 pi-weight-700 pi-uppercase pi-letter-spacing pi-has-bg pi-margin-bottom-30">
+            Meet The Team
+        </h2>
+
+        <!-- Row -->
+        <div class="pi-row team_members">
+
+
+
+            <?php
+            $args = array(
+                'post_type' => 'our_team',
+                'posts_per_page' => 4
+            );
+            $sr = 0;
+            $loop = new WP_Query($args);
+            while ($loop->have_posts()) : $loop->the_post();
+                $sr++;
+                ?>
+
+                <!-- Col 3 -->
+                <div class="pi-col-xs-6 pi-col-sm-3 pi-padding-bottom-20 item">
+
+                    <!-- Team member -->
+                    <div class="pi-img-w pi-img-round-corners pi-img-shadow">
+                        <?php the_post_thumbnail(); ?>
+                        <div class="pi-img-overlay pi-img-overlay-darker">
+                            <div class="pi-caption-centered">
+                                <div>
+                                    <?php
+                                    $facebook = get_post_meta($post->ID, 'facebook', true);
+                                    if (!empty($facebook)) {
+                                        ?>
+                                        <a target="_blank" href="https://www.facebook.com/<?= $facebook ?>">
+                                            <span class="pi-caption-icon pi-caption-icon-small pi-caption-scale icon-facebook"></span>
+                                        </a>
+                                        <?php
+                                    }
+                                    $twitter = get_post_meta($post->ID, 'twitter', true);
+                                    if (!empty($twitter)) {
+                                        ?>
+                                        <a href="https://twitter.com/<?= $twitter ?>">
+                                            <span class="pi-caption-icon pi-caption-icon-small pi-caption-scale icon-twitter"></span>
+                                        </a>
+                                        <?php
+                                    }
+                                    $linked_in_social_id = get_post_meta($post->ID, 'linked_in', true);
+                                    if (!empty($linked_in_social_id)) {
+                                        ?>
+                                        <a href="https://www.linkedin.com/in/<?= $linked_in_social_id ?>">
+                                            <span class="pi-caption-icon pi-caption-icon-small pi-caption-scale icon-linkedin"></span>
+                                        </a>
+                                        <?php
+                                    }
+                                    $instagram_social_id = get_post_meta($post->ID, 'instagram', true);
+                                    if (!empty($instagram_social_id)) {
+                                        ?>
+                                        <a href="https://www.instagram.com/<?= $instagram_social_id ?>">
+                                            <span class="pi-caption-icon pi-caption-icon-small pi-caption-scale icon-instagram"></span>
+                                        </a>
+                                        <?php
+                                    }
+                                    ?>
+                                    <?php the_content(); ?>
+                                    <p><a href="<?php the_permalink(); ?>" class="btn pi-btn-base">Read More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="pi-weight-700 pi-uppercase pi-letter-spacing"><?php the_title(); ?></h6>	
+                    <p class="pi-italic pi-text-base">
+                        <?php echo get_post_meta($post->ID, 'designation', true); ?>
+                    </p>
+                    <!-- End team member -->
+
+                </div>
+                <!-- End col 3 -->
+
+                <?php
+                if ($sr % 2 == 0) {
+                    ?>
+                    <div class="pi-clearfix pi-visible-xs"></div>
+                    <?php
+                }
+            endwhile;
+            ?>
+
+        </div>
+        <!-- End row -->
+
+    </div>
+</div>
+
+<!-- - - - - - - - - - END SECTION - - - - - - - - - -->
 
 
 <?php get_footer(); ?>
