@@ -31,8 +31,10 @@ function theme_settings_page() {
     <div class="wrap custom_theme_option">
         <h2 class="nav-tab-wrapper">
             <a class="nav-tab <?php echo ($tab == "site_options" ? 'nav-tab-active' : ''); ?>" href="?page=aspirations_theme_settings&amp;tab=site_options">Site Options</a>
+            <a class="nav-tab <?php echo ($tab == "free_trial" ? 'nav-tab-active' : ''); ?>" href="?page=aspirations_theme_settings&amp;tab=free_trial">Free Trial</a>
             <a class="nav-tab <?php echo ($tab == "contact_info" ? 'nav-tab-active' : ''); ?>" href="?page=aspirations_theme_settings&amp;tab=contact_info">Contact Info</a>
             <a class="nav-tab <?php echo ($tab == "general_info" ? 'nav-tab-active' : ''); ?>" href="?page=aspirations_theme_settings&amp;tab=general_info">General Info</a>
+            <a class="nav-tab <?php echo ($tab == "our_details" ? 'nav-tab-active' : ''); ?>" href="?page=aspirations_theme_settings&amp;tab=our_details">Our Details</a>
         </h2>
 
         <?php
@@ -111,7 +113,7 @@ function theme_settings_page() {
                                         _custom_media = true;
                                         wp.media.editor.send.attachment = function(props, attachment) {
                                             if (_custom_media) {
-                                                $("#" + id).val(attachment.url); 
+                                                $("#" + id).val(attachment.url);
                                                 $("#img_" + id).attr('src', attachment.url);
                                             } else {
                                                 return _orig_send_attachment.apply(this, [props, attachment]);
@@ -131,6 +133,69 @@ function theme_settings_page() {
                         </div>
                     </div>
                 </div> 
+                <?php
+                break;
+            case 'free_trial':
+                if ($_POST) {
+                    if ($_POST['free_trial_info'] == '1') {
+                        $free_trial_title = get_option('free_trial_title');
+                        $free_trial_text = get_option('free_trial_text');
+                        $free_trial_link = get_option('free_trial_link');
+
+                        if (isset($_POST['free_trial_title'])) {
+                            update_option('free_trial_title', $_POST['free_trial_title'], 'yes');
+                        }
+                        if (isset($_POST['free_trial_text'])) {
+                            update_option('free_trial_text', $_POST['free_trial_text'], 'yes');
+                        }
+                        if (isset($_POST['free_trial_link'])) {
+                            update_option('free_trial_link', $_POST['free_trial_link'], 'yes');
+                        }
+                    }
+                }
+
+                $free_trial_title = get_option('free_trial_title');
+                $free_trial_text = get_option('free_trial_text');
+                $free_trial_link = get_option('free_trial_link');
+
+                if (!$free_trial_title) {
+                    $free_trial_title = '';
+                }
+                if (!$free_trial_text) {
+                    $free_trial_text = '';
+                }
+                if (!$free_trial_link) {
+                    $free_trial_link = '';
+                }
+                ?>
+
+                <div id="dashboard_right_now" class="postbox sj_postbox">
+                    <h2 class="hndle ui-sortable-handle"><span>Free Trial Options</span></h2>
+                    <div class="inside">
+                        <div class="main">
+                            <form method="POST" action="#">
+                                <table class="sj_table">
+                                    <tr>
+                                        <td><label for="phone_no_1">Title</label></td>
+                                        <td width="500"><input type="text" name="free_trial_title" id="phone_no_1" value="<?= $free_trial_title; ?>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="phone_no_2">Text</label></td>
+                                        <td><textarea rows="5" cols="50" name="free_trial_text"><?= $free_trial_text; ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="admin_email">Page's Link</label></td>
+                                        <td><input type="text" name="free_trial_link" id="admin_email" value="<?= $free_trial_link; ?>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="hidden" name="free_trial_info" value="1" /></td>
+                                        <td><input type="submit" value="Update" name="free_trial_info_btn" class="button button-primary button-large" /></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <?php
                 break;
             case 'contact_info':
@@ -406,6 +471,223 @@ function theme_settings_page() {
                                     </tr>
                                     <tr>
                                         <td><input type="submit" name="copyright_text_btn" value="Update" class="button button-primary button-large" /></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </form>  
+                        </div>
+                    </div>
+                </div>
+                <?php
+                break;
+            case 'our_details':
+                if (isset($_REQUEST['we_are_good_at_btn'])) {
+                    $fld_name_1 = get_option('fld_name_1');
+                    $fld_value_1 = get_option('fld_value_1');
+                    $fld_name_2 = get_option('fld_name_2');
+                    $fld_value_2 = get_option('fld_value_2');
+                    $fld_name_3 = get_option('fld_name_3');
+                    $fld_value_3 = get_option('fld_value_3');
+                    $fld_name_4 = get_option('fld_name_4');
+                    $fld_value_4 = get_option('fld_value_4');
+                    $fld_name_5 = get_option('fld_name_5');
+                    $fld_value_5 = get_option('fld_value_5');
+
+                    if (isset($_POST['fld_name_1'])) {
+                        update_option('fld_name_1', $_POST['fld_name_1'], 'yes');
+                    }
+                    if (isset($_POST['fld_value_1'])) {
+                        update_option('fld_value_1', $_POST['fld_value_1'], 'yes');
+                    }
+                    if (isset($_POST['fld_name_2'])) {
+                        update_option('fld_name_2', $_POST['fld_name_2'], 'yes');
+                    }
+                    if (isset($_POST['fld_value_2'])) {
+                        update_option('fld_value_2', $_POST['fld_value_2'], 'yes');
+                    }
+                    if (isset($_POST['fld_name_3'])) {
+                        update_option('fld_name_3', $_POST['fld_name_3'], 'yes');
+                    }
+                    if (isset($_POST['fld_value_3'])) {
+                        update_option('fld_value_3', $_POST['fld_value_3'], 'yes');
+                    }
+                    if (isset($_POST['fld_name_4'])) {
+                        update_option('fld_name_4', $_POST['fld_name_4'], 'yes');
+                    }
+                    if (isset($_POST['fld_value_4'])) {
+                        update_option('fld_value_4', $_POST['fld_value_4'], 'yes');
+                    }
+                    if (isset($_POST['fld_name_5'])) {
+                        update_option('fld_name_5', $_POST['fld_name_5'], 'yes');
+                    }
+                    if (isset($_POST['fld_value_5'])) {
+                        update_option('fld_value_5', $_POST['fld_value_5'], 'yes');
+                    }
+                }
+                $fld_name_1 = get_option('fld_name_1');
+                $fld_value_1 = get_option('fld_value_1');
+                $fld_name_2 = get_option('fld_name_2');
+                $fld_value_2 = get_option('fld_value_2');
+                $fld_name_3 = get_option('fld_name_3');
+                $fld_value_3 = get_option('fld_value_3');
+                $fld_name_4 = get_option('fld_name_4');
+                $fld_value_4 = get_option('fld_value_4');
+                $fld_name_5 = get_option('fld_name_5');
+                $fld_value_5 = get_option('fld_value_5');
+
+                if (!$fld_name_1) {
+                    $fld_name_1 = '';
+                }
+                if (!$fld_value_1) {
+                    $fld_value_1 = '';
+                }
+                if (!$fld_name_2) {
+                    $fld_name_2 = '';
+                }
+                if (!$fld_value_2) {
+                    $fld_value_2 = '';
+                }
+                if (!$fld_name_3) {
+                    $fld_name_3 = '';
+                }
+                if (!$fld_value_3) {
+                    $fld_value_3 = '';
+                }
+                if (!$fld_name_4) {
+                    $fld_name_4 = '';
+                }
+                if (!$fld_value_4) {
+                    $fld_value_4 = '';
+                }
+                if (!$fld_name_5) {
+                    $fld_name_5 = '';
+                }
+                if (!$fld_value_5) {
+                    $fld_value_5 = '';
+                }
+                ?>
+                <div id="dashboard_right_now" class="postbox sj_postbox">
+                    <h2 class="hndle ui-sortable-handle"><span>We are good at</span></h2>
+                    <div class="inside">
+                        <div class="main">
+                            <form method="POST" action="#">
+                                <table class="sj_table site_options">
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="fld_name_1">Field 1</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $fld_name_1 ?>" name="fld_name_1" id="fld_name_1" placeholder="Field Name" />
+                                        </td>
+                                        <td><input type="text" value="<?= $fld_value_1 ?>" name="fld_value_1" id="fld_value_1" placeholder="Field Value" /></td>
+                                    </tr>
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="fld_name_2">Field 2</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $fld_name_2 ?>" name="fld_name_2" id="fld_name_2" placeholder="Field Name" />
+                                        </td>
+                                        <td><input type="text" value="<?= $fld_value_2 ?>" name="fld_value_2" id="fld_value_2" placeholder="Field Value" /></td>
+                                    </tr>
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="fld_name_3">Field 3</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $fld_name_3 ?>" name="fld_name_3" id="fld_name_3" placeholder="Field Name" />
+                                        </td>
+                                        <td><input type="text" value="<?= $fld_value_3 ?>" name="fld_value_3" id="fld_value_3" placeholder="Field Value" /></td>
+                                    </tr>
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="fld_name_4">Field 4</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $fld_name_4 ?>" name="fld_name_4" id="fld_name_4" placeholder="Field Name" />
+                                        </td>
+                                        <td><input type="text" value="<?= $fld_value_4 ?>" name="fld_value_4" id="fld_value_4" placeholder="Field Value" /></td>
+                                    </tr>
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="fld_name_5">Field 5</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $fld_name_5 ?>" name="fld_name_5" id="fld_name_5" placeholder="Field Name" />
+                                        </td>
+                                        <td><input type="text" value="<?= $fld_value_5 ?>" name="fld_value_5" id="fld_value_5" placeholder="Field Value" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="submit" name="we_are_good_at_btn" value="Update" class="button button-primary button-large" /></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </form>  
+                        </div>
+                    </div>
+                </div>
+
+
+                <?php
+                if (isset($_REQUEST['office_details_btn'])) {
+                    $total_employees = get_option('total_employees');
+                    $image_per_hour = get_option('image_per_hour');
+                    $hours_per_day = get_option('hours_per_day');
+                    $image_done = get_option('image_done');
+
+                    if (isset($_POST['total_employees'])) {
+                        update_option('total_employees', $_POST['total_employees'], 'yes');
+                    }
+                    if (isset($_POST['image_per_hour'])) {
+                        update_option('image_per_hour', $_POST['image_per_hour'], 'yes');
+                    }
+                    if (isset($_POST['hours_per_day'])) {
+                        update_option('hours_per_day', $_POST['hours_per_day'], 'yes');
+                    }
+                    if (isset($_POST['image_done'])) {
+                        update_option('image_done', $_POST['image_done'], 'yes');
+                    }
+                }
+                $total_employees = get_option('total_employees');
+                $image_per_hour = get_option('image_per_hour');
+                $hours_per_day = get_option('hours_per_day');
+                $image_done = get_option('image_done');
+
+                if (!$total_employees) {
+                    $total_employees = '';
+                }
+                if (!$image_per_hour) {
+                    $image_per_hour = '';
+                }
+                if (!$hours_per_day) {
+                    $hours_per_day = '';
+                }
+                if (!$image_done) {
+                    $image_done = '';
+                }
+                ?>
+                <div id="dashboard_right_now" class="postbox sj_postbox">
+                    <h2 class="hndle ui-sortable-handle"><span>Office Details</span></h2>
+                    <div class="inside">
+                        <div class="main">
+                            <form method="POST" action="#">
+                                <table class="sj_table site_options">
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="total_employees">Total Employees</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $total_employees ?>" name="total_employees" id="total_employees" placeholder="Total Employees" />
+                                        </td>
+                                    </tr>
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="image_per_hour">Images per hour</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $image_per_hour ?>" name="image_per_hour" id="image_per_hour" placeholder="Images per hour" />
+                                        </td>
+                                    </tr>
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="hours_per_day">Hours per day</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $hours_per_day ?>" name="hours_per_day" id="hours_per_day" placeholder="Hours per day" />
+                                        </td>
+                                    </tr>
+                                    <tr class="border_bottom">
+                                        <td width="100"><label for="fld_name_5">Image done</label></td>
+                                        <td>
+                                            <input type="text" value="<?= $image_done ?>" name="image_done" id="image_done" placeholder="Image done" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="submit" name="office_details_btn" value="Update" class="button button-primary button-large" /></td>
                                         <td></td>
                                     </tr>
                                 </table>

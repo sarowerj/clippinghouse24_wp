@@ -98,3 +98,7 @@ and open the template in the editor.
 .team_members .item img{
     height:auto;
 }
+
+.recent_work .item.pi-gallery-item img{
+    height:auto;
+}

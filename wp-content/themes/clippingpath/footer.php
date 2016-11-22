@@ -188,9 +188,7 @@ $facebook = get_option('facebook');
 <script src="<?php echo get_template_directory_uri(); ?>/3dParty/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/3dParty/jquery.touchSwipe.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/3dParty/gauge.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/3dParty/inview.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/3dParty/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/3dParty/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/3dParty/inview.js"></script> 
 <script src="<?php echo get_template_directory_uri(); ?>/3dParty/requestAnimationFramePolyfill.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/3dParty/jquery.scrollTo.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/3dParty/colorbox/jquery.colorbox-min.js"></script>
@@ -201,9 +199,9 @@ $facebook = get_option('facebook');
 <script src="<?php echo get_template_directory_uri(); ?>/scripts/pi.counter.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/scripts/pi.init.counter.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/scripts/pi.parallax.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/scripts/pi.init.parallax.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/scripts/pi.init.revolutionSlider.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/scripts/pi.init.parallax.js"></script> 
 
+<?php wp_footer(); ?>
 
 </body>
 </html>

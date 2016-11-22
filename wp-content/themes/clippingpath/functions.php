@@ -22,10 +22,12 @@ include('themeoptions.php');
 /**
  * =============================================================================
  * To support Post Thumbnail.
+ * To support Excerpt for All.
  * @return
  * =============================================================================
  */
 add_theme_support('post-thumbnails');
+add_post_type_support( 'page', 'excerpt' );
 
 
 
@@ -49,8 +51,30 @@ add_action('admin_enqueue_scripts', function() {
  */
 add_action('widgets_init', function() {
     register_sidebar(array(
-        'name' => __('Primary Widgets', 'clippingpath'),
-        'id' => 'search',
+        'name' => __('History', 'clippingpath'),
+        'id' => 'history',
+        'description' => __('Primary Widget for website', 'clippingpath'),
+        'before_widget' => '<div>',
+        'after_widget' => '</div>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>',
+    ));
+});
+add_action('widgets_init', function() {
+    register_sidebar(array(
+        'name' => __('Vision', 'clippingpath'),
+        'id' => 'primary_widget',
+        'description' => __('Primary Widget for website', 'clippingpath'),
+        'before_widget' => '<div>',
+        'after_widget' => '</div>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>',
+    ));
+});
+add_action('widgets_init', function() {
+    register_sidebar(array(
+        'name' => __('Phyloshopy', 'clippingpath'),
+        'id' => 'phyloshopy',
         'description' => __('Primary Widget for website', 'clippingpath'),
         'before_widget' => '<div>',
         'after_widget' => '</div>',
@@ -173,3 +197,88 @@ add_action('save_post', function($post_id) {
         update_post_meta($post_id, 'instagram', $_POST['instagram']);
     }
 });
+
+
+
+/**
+ * =============================================================================
+ * To make custom post type for Our Recent Work.
+ * @post_type recent_work
+ * @slug recent_work
+ * @supports title,thumbnail,editor
+ * @MultiPostThumbnails is to add extra 4 post thumbnails.
+ * =============================================================================
+ */
+add_action('init', function() {
+    register_post_type('recent_work', array(
+        'labels' => array(
+            'name' => __('Our Recent Work'),
+            'singular_name' => __('recent_work')
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'recent_work'),
+        'menu_icon' => 'dashicons-hammer',
+        'supports' => array('title', 'thumbnail', 'editor','excerpt')
+    ));
+});
+
+require_once('library/multi-post-thumbnails.php');
+if (class_exists('MultiPostThumbnails')) {
+    new MultiPostThumbnails(array(
+        'label' => '2nd Feature Image',
+        'id' => 'feature-image-2',
+        'post_type' => 'recent_work'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '3rd Feature Image',
+        'id' => 'feature-image-3',
+        'post_type' => 'recent_work'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '4th Feature Image',
+        'id' => 'feature-image-4',
+        'post_type' => 'recent_work'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '5th Feature Image',
+        'id' => 'feature-image-5',
+        'post_type' => 'recent_work'
+            )
+    );
+}
+
+
+
+/**
+ * To make inner pages.
+ */
+if (class_exists('MultiPostThumbnails')) {
+    new MultiPostThumbnails(array(
+        'label' => '2nd Feature Image',
+        'id' => 'feature-image-2',
+        'post_type' => 'page'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '3rd Feature Image',
+        'id' => 'feature-image-3',
+        'post_type' => 'page'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '4th Feature Image',
+        'id' => 'feature-image-4',
+        'post_type' => 'page'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '5th Feature Image',
+        'id' => 'feature-image-5',
+        'post_type' => 'page'
+            )
+    );
+}

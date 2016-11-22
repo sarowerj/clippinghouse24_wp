@@ -37,6 +37,8 @@
 
 
         <script src="<?php echo get_template_directory_uri(); ?>/3dParty/jquery-1.11.0.min.js"></script>
+        
+        <?php wp_head(); ?>
     </head>
     <body>
         <?php
@@ -83,7 +85,7 @@
 
                         <!-- Logo -->
                         <div class="pi-row-block pi-row-block-logo pi-center-text-xs-only" style="margin-right: 20px;">
-                            <a href="<?php echo esc_url(home_url('/')); ?>"> 
+                            <a href="<?= esc_url(home_url('/')); ?>"> 
                                 <img src="<?php echo ($logo_url == '') ? esc_url(get_template_directory_uri()) . '/images/cphouse_logo_main.png' : $logo_url ?>" alt="" />
                             </a>
                         </div>

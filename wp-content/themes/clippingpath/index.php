@@ -6,9 +6,17 @@
  */
 
 get_header();
+
+echo do_shortcode('[rev_slider main_slider]');
 ?>
 
+
 <!-- - - - - - - - - - SECTION - - - - - - - - - -->
+<?php
+$free_trial_title = get_option('free_trial_title');
+$free_trial_text = get_option('free_trial_text');
+$free_trial_link = get_option('free_trial_link');
+?>
 <div class="pi-section-w pi-shadow-inside-top pi-section-dark">
     <div class="pi-texture" style="background: url(<?php echo get_template_directory_uri(); ?>/img/hexagon.png) repeat;"></div>
     <div class="pi-section pi-padding-top-50 pi-padding-bottom-30">
@@ -18,13 +26,9 @@ get_header();
 
             <!-- Col 9 -->
             <div class="pi-col-sm-9 pi-center-text-xs">
-                <h3 class="pi-weight-300">
-                    Want to know our performance? 
-                </h3>
+                <h3 class="pi-weight-300"><?= $free_trial_title ?></h3>
 
-                <p class="lead-16">
-                    Don't feel hesitate to try us for free. We are alway ready to work. We will do maximum 5 trial images.
-                </p>
+                <p class="lead-16"><?= $free_trial_text ?></p>
             </div>
             <!-- End col 9 -->
 
@@ -33,7 +37,7 @@ get_header();
             <!-- Col 3 -->
             <div class="pi-col-sm-3 pi-text-right pi-center-text-xs">
                 <p class="pi-margin-top-5">
-                    <a href="#" class="btn pi-btn-base pi-btn-no-border pi-btn-big">
+                    <a href="<?= $free_trial_link ?>" class="btn pi-btn-base pi-btn-no-border pi-btn-big">
                         Free Trial
                     </a>
                 </p>
@@ -78,9 +82,9 @@ get_header();
                     <div class="pi-icon-box pi-icon-box-hover">
                         <div class="pi-icon-box-icon pi-icon-box-icon-base">
                             <?php
-                                $icon = get_post_meta($post->ID, 'class_name', true);
+                            $icon = get_post_meta($post->ID, 'class_name', true);
                             ?>
-                            <i class="<?=($icon!='')?$icon:'icon-clock'; ?>"></i>
+                            <i class="<?= ($icon != '') ? $icon : 'icon-clock'; ?>"></i>
                         </div>
 
                         <div class="pi-icon-box-content">
@@ -109,6 +113,50 @@ get_header();
             ?>
         </div>
         <!-- End row -->
+
+
+        <h2 class="h4 pi-weight-700 pi-uppercase pi-letter-spacing pi-has-bg pi-margin-bottom-25">
+            Recent Work
+        </h2>
+
+        <!-- Portfolio gallery -->
+        <div class="recent_work pi-row pi-liquid-col-xs-3 pi-gallery pi-padding-bottom-20">
+
+
+            <?php
+            $args = array(
+                'post_type' => 'recent_work',
+                'posts_per_page' => 4
+            );
+            $loop = new WP_Query($args);
+            while ($loop->have_posts()) : $loop->the_post();
+                ?>
+                <!-- Portfolio item -->
+                <div class="item pi-gallery-item pi-padding-bottom-40">
+                    <div class="pi-img-w pi-img-round-corners pi-img-shadow">
+                        <a href="<?= wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>" class="pi-colorbox">
+                            <?php echo get_the_post_thumbnail($post_id, 'medium'); ?>
+                            <div class="pi-img-overlay pi-img-overlay-darker">
+                                <div class="pi-caption-centered">
+                                    <div>
+                                        <span class="pi-caption-icon pi-caption-scale icon-search"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <h3 class="h6 pi-weight-700 pi-uppercase pi-letter-spacing pi-margin-bottom-5"><a href="#" class="pi-link-dark">Bread and spikes</a></h3>
+                    <ul class="pi-meta">
+                        <li><i class="icon-tag"></i><a href="javascript:void(0)"><?php echo get_the_excerpt(); ?></a></li>
+                    </ul>
+                </div>
+                <!-- End portfolio item -->
+                <?php
+            endwhile;
+            ?>
+
+        </div>
+        <!-- End portfolio gallery -->
 
 
     </div>
@@ -219,49 +267,78 @@ get_header();
                     We Are Good At
                 </h2>
 
-                <!-- Progress bar -->
-                <div class="pi-counter pi-counter-line pi-slave" data-counter-type="line" data-count-from="0" data-count-to="85" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+                <?php
+                $fld_name_1 = get_option('fld_name_1');
+                $fld_value_1 = get_option('fld_value_1');
+                $fld_name_2 = get_option('fld_name_2');
+                $fld_value_2 = get_option('fld_value_2');
+                $fld_name_3 = get_option('fld_name_3');
+                $fld_value_3 = get_option('fld_value_3');
+                $fld_name_4 = get_option('fld_name_4');
+                $fld_value_4 = get_option('fld_value_4');
+                ?>
 
-                    <div class="pi-counter-count">
-                        <p><i class="icon-globe pi-icon-left"></i>Global Communication</p>
-                        <div class="pi-counter-progress pi-bar-four"></div>
+                <?php
+                if (!empty($fld_name_1)) {
+                    ?>
+                    <!-- Progress bar -->
+                    <div class="pi-counter pi-counter-line pi-slave" data-counter-type="line" data-count-from="0" data-count-to="<?= $fld_value_1 ?>" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+
+                        <div class="pi-counter-count">
+                            <p><i class="icon-globe pi-icon-left"></i><?= $fld_name_1 ?></p>
+                            <div class="pi-counter-progress pi-bar-four"></div>
+                        </div>
+
                     </div>
+                    <!-- End progress bar -->
+                    <?php
+                }
+                if (!empty($fld_name_2)) {
+                    ?>
 
-                </div>
-                <!-- End progress bar -->
+                    <!-- Progress bar -->
+                    <div class="pi-counter pi-counter-line" data-counter-type="line" data-count-from="0" data-count-to="<?= $fld_value_2 ?>" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
 
-                <!-- Progress bar -->
-                <div class="pi-counter pi-counter-line" data-counter-type="line" data-count-from="0" data-count-to="85" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+                        <div class="pi-counter-count">
+                            <p><i class="icon-pencil pi-icon-left"></i><?= $fld_name_2 ?></p>
+                            <div class="pi-counter-progress pi-bar-one"></div>
+                        </div>
 
-                    <div class="pi-counter-count">
-                        <p><i class="icon-pencil pi-icon-left"></i>Clipping Path</p>
-                        <div class="pi-counter-progress pi-bar-one"></div>
                     </div>
+                    <!-- End progress bar -->
+                    <?php
+                }
+                if (!empty($fld_name_3)) {
+                    ?>
 
-                </div>
-                <!-- End progress bar -->
+                    <!-- Progress bar -->
+                    <div class="pi-counter pi-counter-line" data-counter-type="line" data-count-from="0" data-count-to="<?= $fld_value_3 ?>" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
 
-                <!-- Progress bar -->
-                <div class="pi-counter pi-counter-line" data-counter-type="line" data-count-from="0" data-count-to="95" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+                        <div class="pi-counter-count">
+                            <p><i class="icon-pencil pi-icon-left"></i><?= $fld_name_3 ?></p>
+                            <div class="pi-counter-progress pi-bar-two"></div>
+                        </div>
 
-                    <div class="pi-counter-count">
-                        <p><i class="icon-pencil pi-icon-left"></i>Retouch</p>
-                        <div class="pi-counter-progress pi-bar-two"></div>
                     </div>
+                    <!-- End progress bar -->
+                    <?php
+                }
+                if (!empty($fld_name_4)) {
+                    ?>
 
-                </div>
-                <!-- End progress bar -->
+                    <!-- Progress bar -->
+                    <div class="pi-counter pi-counter-line pi-slave" data-counter-type="line" data-count-from="0" data-count-to="<?= $fld_value_4 ?>" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
 
-                <!-- Progress bar -->
-                <div class="pi-counter pi-counter-line pi-slave" data-counter-type="line" data-count-from="0" data-count-to="98" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+                        <div class="pi-counter-count">
+                            <p><i class="icon-air pi-icon-left"></i><?= $fld_name_4 ?></p>
+                            <div class="pi-counter-progress pi-bar-three"></div>
+                        </div>
 
-                    <div class="pi-counter-count">
-                        <p><i class="icon-air pi-icon-left"></i>Layer and Hair Masking</p>
-                        <div class="pi-counter-progress pi-bar-three"></div>
                     </div>
-
-                </div>
-                <!-- End progress bar -->
+                    <!-- End progress bar -->
+                    <?php
+                }
+                ?>
 
             </div>
             <!-- End col 6 -->
@@ -294,7 +371,7 @@ get_header();
 
                     <!-- Team member -->
                     <div class="pi-img-w pi-img-round-corners pi-img-shadow">
-                        <?php the_post_thumbnail(); ?>
+                        <?php echo get_the_post_thumbnail($post_id, 'medium'); ?>
                         <div class="pi-img-overlay pi-img-overlay-darker">
                             <div class="pi-caption-centered">
                                 <div>
@@ -364,5 +441,94 @@ get_header();
 
 <!-- - - - - - - - - - END SECTION - - - - - - - - - -->
 
+<!-- - - - - - - - - - SECTION - - - - - - - - - -->
+<?php
+$total_employees = get_option('total_employees');
+$image_per_hour = get_option('image_per_hour');
+$hours_per_day = get_option('hours_per_day');
+$image_done = get_option('image_done');
+?>
+<div class="pi-section-w pi-section-parallax" style="background-image: url(<?php echo get_template_directory_uri(); ?>/images/parallax_bg.jpg);">
+    <div class="pi-texture pi-section-overlay-base"></div>
+    <div class="pi-section pi-padding-bottom-30">
+
+        <!-- Row -->
+        <div class="pi-row pi-grid-small-margins pi-text-center">
+
+            <!-- Col 3 -->
+            <div class="pi-col-sm-3 pi-col-2xs-6 pi-padding-bottom-20">
+                <div class="pi-counter pi-counter-simple" data-count-from="0" data-count-to="<?= $total_employees ?>" data-easing="easeInCirc" data-duration="1000" data-frames-per-second="0">
+                    <div class="pi-counter-count pi-counter-count-big pi-text-white pi-weight-300">
+
+                        <p>
+                            <i class="icon-users pi-icon pi-icon-big pi-text-white"></i>
+                        </p>
+
+                        <div class="pi-counter-number"><?= $total_employees ?></div>
+
+                    </div>
+                    <p>Total Employees</p>
+                </div>
+            </div>
+            <!-- End col 3 -->
+
+            <!-- Col 3 -->
+            <div class="pi-col-sm-3 pi-col-2xs-6 pi-padding-bottom-20">
+                <div class="pi-counter pi-counter-simple" data-count-from="0" data-count-to="<?= $image_per_hour ?>" data-easing="easeInCirc" data-duration="2000" data-frames-per-second="10">
+                    <div class="pi-counter-count pi-counter-count-big pi-text-white pi-weight-300">
+
+                        <p>
+                            <i class="icon-leaf pi-icon pi-icon-big pi-text-white"></i>
+                        </p>
+
+                        <span class="pi-counter-number"><?= $image_per_hour ?></span>
+
+                    </div>
+                    <p>Images per hour</p>
+                </div>
+            </div>
+            <!-- End col 3 -->
+
+            <!-- Col 3 -->
+            <div class="pi-col-sm-3 pi-col-2xs-6 pi-padding-bottom-20">
+                <div class="pi-counter pi-counter-simple" data-count-from="0" data-count-to="<?= $hours_per_day ?>" data-easing="easeInCirc" data-duration="3000" data-frames-per-second="10">
+                    <div class="pi-counter-count pi-counter-count-big pi-text-white pi-weight-300">
+
+                        <p>
+                            <i class="icon-clock pi-icon pi-icon-big pi-text-white"></i>
+                        </p>
+
+                        <span class="pi-counter-number"><?= $hours_per_day ?></span>
+
+                    </div>
+                    <p>Hours per day</p>
+                </div>
+            </div>
+            <!-- End col 3 -->
+
+            <!-- Col 3 -->
+            <div class="pi-col-sm-3 pi-col-2xs-6 pi-padding-bottom-20">
+                <div class="pi-counter pi-counter-simple" data-count-from="0" data-count-to="<?= $image_done ?>" data-easing="easeInCirc" data-duration="4000" data-frames-per-second="10">
+                    <div class="pi-counter-count pi-counter-count-big pi-text-white pi-weight-300">
+
+                        <p>
+                            <i class="icon-paper-plane pi-icon pi-icon-big pi-text-white"></i>
+                        </p>
+
+                        <span class="pi-counter-number"><?= $image_done ?></span>
+
+                    </div>
+                    <p>Image done</p>
+                </div>
+            </div>
+            <!-- End col 3 -->
+
+        </div>
+        <!-- End row -->
+
+    </div>
+</div>
+
+<!-- - - - - - - - - - END SECTION - - - - - - - - - -->
 
 <?php get_footer(); ?>
