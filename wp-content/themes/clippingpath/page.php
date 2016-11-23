@@ -22,9 +22,7 @@ while (have_posts()) : the_post();
         <div class="pi-section-w pi-section-white piCounter">
             <div class="pi-section pi-padding-bottom-30">
                 <div class="pi-row pi-grid-small-margins">
-                     
-
-                     asfadsf
+                     <?php the_content(); ?>
                 </div>
             </div>
         </div>
