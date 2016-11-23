@@ -187,6 +187,8 @@ $free_trial_link = get_option('free_trial_link');
                         );
                         $loop = new WP_Query($args);
                         while ($loop->have_posts()) : $loop->the_post();
+                            $designation = get_post_meta($post->ID, 'designation', true);
+                            $company_name = get_post_meta($post->ID, 'company_name', true);
                             ?>
                             <!-- Slide -->
                             <div class="pi-slide">	
@@ -205,7 +207,7 @@ $free_trial_link = get_option('free_trial_link');
                                     <?= the_title(); ?>
                                 </p>
                                 <p class="pi-italic">
-                                    Executive Director <a href="#">Company Inc.</a>
+                                    <?=$designation ?> <a href="#"><?=$company_name?></a>
                                 </p>
                             </div>
                             <!-- End slide -->

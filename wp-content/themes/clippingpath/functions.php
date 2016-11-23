@@ -82,6 +82,28 @@ add_action('widgets_init', function() {
         'after_title' => '</h3>',
     ));
 });
+add_action('widgets_init', function() {
+    register_sidebar(array(
+        'name' => __('Type', 'pricing_type'),
+        'id' => 'pricing_type',
+        'description' => __('Pricing type', 'clippingpath'),
+        'before_widget' => '<div>',
+        'after_widget' => '</div>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>',
+    ));
+});
+add_action('widgets_init', function() {
+    register_sidebar(array(
+        'name' => __('Price', 'pricing_price'),
+        'id' => 'pricing_price',
+        'description' => __('Price', 'clippingpath'),
+        'before_widget' => '<div>',
+        'after_widget' => '</div>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>',
+    ));
+});
 
 
 
@@ -111,13 +133,13 @@ add_action('init', function() {
 });
 add_action('add_meta_boxes', function() {
     add_meta_box(
-            'test_meta_box', __('Our Offer Icon Class', 'what_we_offer'), 'what_we_offer_custom_fld', 'what_we_offer', 'normal', 'high'
+            'test_meta_box', __('Our Offer Icon Class', 'what_we_offer'), 'custom_fld', 'what_we_offer', 'normal', 'high'
     );
 });
 
-function what_we_offer_custom_fld() {
+function custom_fld() {
     global $post;
-    require 'what_we_offer_custom_fld.php';
+    require 'custom_fld.php';
 }
 
 add_action('save_post', function($post_id) {
@@ -145,8 +167,21 @@ add_action('init', function() {
         'has_archive' => true,
         'rewrite' => array('slug' => 'testimonial'),
         'menu_icon' => 'dashicons-format-quote',
-        'supports' => array('title', 'editor', 'excerpt')
+        'supports' => array('title', 'editor', 'thumbnail')
     ));
+});
+add_action('add_meta_boxes', function() {
+    add_meta_box(
+            'test_meta_box', __('Our Offer Icon Class', 'testimonial'), 'custom_fld', 'testimonial', 'normal', 'high'
+    );
+});
+
+add_action('save_post', function($post_id) {
+    global $post;
+    if ($post->post_type == 'testimonial') {
+        update_post_meta($post_id, 'designation', $_POST['designation']);
+        update_post_meta($post_id, 'company_name', $_POST['company_name']);
+    }
 });
 
 
@@ -254,7 +289,9 @@ if (class_exists('MultiPostThumbnails')) {
 
 
 /**
+ * =============================================================================
  * To make inner pages.
+ * =============================================================================
  */
 if (class_exists('MultiPostThumbnails')) {
     new MultiPostThumbnails(array(
@@ -279,6 +316,121 @@ if (class_exists('MultiPostThumbnails')) {
         'label' => '5th Feature Image',
         'id' => 'feature-image-5',
         'post_type' => 'page'
+            )
+    );
+}
+
+
+
+/**
+ * =============================================================================
+ * To make custom post type for Our Core Value.
+ * @post_type core_values
+ * @slug core_values
+ * @supports title,thumbnail,editor
+ * @add_meta_boxes is to add two extra custom fields.
+ * @save_post is to save custom fields data.
+ * =============================================================================
+ */
+add_action('init', function() {
+    register_post_type('core_values', array(
+        'labels' => array(
+            'name' => __('Core Values'),
+            'singular_name' => __('core_values')
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'core_values'),
+        'menu_icon' => 'dashicons-admin-settings',
+        'supports' => array('title', 'thumbnail', 'editor','page-attributes')
+    ));
+});
+
+add_action('add_meta_boxes', function() {
+    add_meta_box(
+            'test_meta_box', __('Our Offer Icon Class', 'core_values'), 'custom_fld', 'core_values', 'normal', 'high'
+    );
+});
+
+add_action('save_post', function($post_id) {
+    global $post;
+    if ($post->post_type == 'core_values') {
+        update_post_meta($post_id, 'class_name', $_POST['class_name']);
+        update_post_meta($post_id, 'color_code', $_POST['color_code']);
+    }
+});
+
+
+
+/**
+ * =============================================================================
+ * To make custom post type for Our Clients.
+ * @post_type our_clients
+ * @slug our_clients
+ * @supports title,thumbnail,editor
+ * =============================================================================
+ */
+add_action('init', function() {
+    register_post_type('our_clients', array(
+        'labels' => array(
+            'name' => __('Our Clients'),
+            'singular_name' => __('our_client')
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'our_clients'),
+        'menu_icon' => 'dashicons-universal-access',
+        'supports' => array('title', 'thumbnail', 'editor')
+    ));
+});
+
+
+
+
+/**
+ * =============================================================================
+ * To make custom post type for Gallery.
+ * @post_type gallery
+ * @slug gallery
+ * @supports title,thumbnail,editor
+ * =============================================================================
+ */
+add_action('init', function() {
+    register_post_type('gallery', array(
+        'labels' => array(
+            'name' => __('Gallery'),
+            'singular_name' => __('gallery')
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'gallery'),
+        'menu_icon' => 'dashicons-images-alt',
+        'supports' => array('title', 'thumbnail', 'editor')
+    ));
+});
+if (class_exists('MultiPostThumbnails')) {
+    new MultiPostThumbnails(array(
+        'label' => '2nd Feature Image',
+        'id' => 'feature-image-2',
+        'post_type' => 'gallery'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '3rd Feature Image',
+        'id' => 'feature-image-3',
+        'post_type' => 'gallery'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '4th Feature Image',
+        'id' => 'feature-image-4',
+        'post_type' => 'gallery'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '5th Feature Image',
+        'id' => 'feature-image-5',
+        'post_type' => 'gallery'
             )
     );
 }

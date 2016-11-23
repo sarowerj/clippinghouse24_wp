@@ -102,3 +102,11 @@ and open the template in the editor.
 .recent_work .item.pi-gallery-item img{
     height:auto;
 }
+
+
+.our_clients .item img,.pi-img-w img{
+    height:auto;
+}
+.pi-testimonial-author .pi-testimonial-author-photo img{
+    max-width:70px;
+}
