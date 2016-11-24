@@ -22,11 +22,15 @@ while (have_posts()) : the_post();
         <div class="pi-section-w pi-section-white piCounter">
             <div class="pi-section pi-padding-bottom-30">
                 <div class="pi-row pi-grid-small-margins">
-                     <?php the_content(); ?>
+                    <?php the_content(); ?>
                 </div>
             </div>
         </div>
-
+        <?php
+        if (has_excerpt($post->ID)) {
+            the_excerpt();
+        }
+        ?>
     </main>  
     <?php
 endwhile;

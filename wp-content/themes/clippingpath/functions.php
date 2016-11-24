@@ -27,7 +27,8 @@ include('themeoptions.php');
  * =============================================================================
  */
 add_theme_support('post-thumbnails');
-add_post_type_support( 'page', 'excerpt' );
+add_post_type_support('page', 'excerpt');
+add_filter('the_excerpt', 'do_shortcode');
 
 
 
@@ -46,6 +47,7 @@ add_action('admin_enqueue_scripts', function() {
 /**
  * =============================================================================
  * To ad widget.
+ * @widget_in_content to make widget insice shortcode
  * @return 
  * =============================================================================
  */
@@ -105,6 +107,38 @@ add_action('widgets_init', function() {
     ));
 });
 
+/**
+ * =============================================================================
+ * To make shortcode for widget.
+ * @return HTML
+ * Shortcode sample [widget_shortcode id="widget_name"]
+ * =============================================================================
+ */
+function widget_in_content($atts) {
+    extract(shortcode_atts(array('id' => FALSE), $atts));
+    ob_start();
+    dynamic_sidebar($id);
+    $sidebar = ob_get_contents();
+    ob_end_clean();
+    return $sidebar;
+}
+
+add_shortcode('widget_shortcode', 'widget_in_content');
+
+
+
+/**
+ * =============================================================================
+ * To make shortcode for widget.
+ * @return HTML
+ * Shortcode sample [widget_shortcode id="widget_name"]
+ * =============================================================================
+ */
+function free_trial_widget($atts){
+    $color = $atts['color'];
+    $inter = include('interface_free_trial_'.$color.'.php');
+}
+add_shortcode('FreeTrial', 'free_trial_widget');
 
 
 /**
@@ -114,7 +148,7 @@ add_action('widgets_init', function() {
  * @slug what_we_offer
  * @supports title,thumbnail,editor
  * @add_meta_boxes is to add custom meta fields to team member.
- * @team_member_social_pages is to make user interface for custom fields.
+ * @custom_fld is to make user interface for custom fields.
  * @save_post is to save custom fields data.
  * =============================================================================
  */
@@ -254,7 +288,7 @@ add_action('init', function() {
         'has_archive' => true,
         'rewrite' => array('slug' => 'recent_work'),
         'menu_icon' => 'dashicons-hammer',
-        'supports' => array('title', 'thumbnail', 'editor','excerpt')
+        'supports' => array('title', 'thumbnail', 'editor', 'excerpt')
     ));
 });
 
@@ -342,7 +376,7 @@ add_action('init', function() {
         'has_archive' => true,
         'rewrite' => array('slug' => 'core_values'),
         'menu_icon' => 'dashicons-admin-settings',
-        'supports' => array('title', 'thumbnail', 'editor','page-attributes')
+        'supports' => array('title', 'thumbnail', 'editor', 'page-attributes')
     ));
 });
 

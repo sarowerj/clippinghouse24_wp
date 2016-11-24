@@ -16,7 +16,7 @@ while (have_posts()) : the_post();
 
 
     <!-- - - - - - - - - - SECTION - - - - - - - - - -->
-    <?php include('inner_header.php');?>
+    <?php include('inner_header.php'); ?>
     <!-- - - - - - - - - - END SECTION - - - - - - - - - -->
 
 
@@ -80,7 +80,6 @@ while (have_posts()) : the_post();
                             <?php the_title(); ?>
                         </h2>
                         <?php the_content(); ?>
-                        <?php the_excerpt(); ?>
                     </div>
                 </div>
 
@@ -377,7 +376,7 @@ while (have_posts()) : the_post();
 
                                     <div>
                                         <span class="pi-testimonial-author-name"><strong><?php the_title(); ?></strong></span> <br>
-                                        <span class="pi-testimonial-author-company"><?=$designation; ?> <a href="javascript:void(0)"><?=$company_name;?></a></span>
+                                        <span class="pi-testimonial-author-company"><?= $designation; ?> <a href="javascript:void(0)"><?= $company_name; ?></a></span>
                                     </div>
                                 </div>
                             </div>
@@ -385,6 +384,7 @@ while (have_posts()) : the_post();
                         </div>
                         <?php
                     endwhile;
+                    wp_reset_postdata();
                     ?>
                 </div>
                 <!-- End testimonials -->
@@ -392,6 +392,9 @@ while (have_posts()) : the_post();
         </div>
     </main>
     <?php
+    if (has_excerpt($post->ID)) {
+        the_excerpt();
+    }
 endwhile;
 get_footer();
 ?>

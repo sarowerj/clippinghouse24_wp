@@ -25,6 +25,8 @@
 
         <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/social.css"/>
 
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/pricing-tables.css" />
+
 
         <!--Fonts-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;subset=latin,cyrillic'
@@ -37,7 +39,7 @@
 
 
         <script src="<?php echo get_template_directory_uri(); ?>/3dParty/jquery-1.11.0.min.js"></script>
-        
+
         <?php wp_head(); ?>
     </head>
     <body>
@@ -93,7 +95,7 @@
 
                         <!-- Search -->
                         <div class="pi-row-block pi-pull-right pi-hidden-sm"> 
-                            <form class="form-inline pi-search-form-wide" role="form" action="<?=site_url();?>">
+                            <form class="form-inline pi-search-form-wide" role="form" action="<?= site_url(); ?>">
                                 <div class="pi-input-with-icon pi-input-inline" style="margin-right: 1px;">
                                     <div class="pi-input-icon"><i class="icon-search-1"></i></div>
                                     <input type="text" name="s" id="s" class="form-control pi-input-wide" placeholder="Type here..">

@@ -12,60 +12,16 @@ echo do_shortcode('[rev_slider main_slider]');
 
 
 <!-- - - - - - - - - - SECTION - - - - - - - - - -->
-<?php
-$free_trial_title = get_option('free_trial_title');
-$free_trial_text = get_option('free_trial_text');
-$free_trial_link = get_option('free_trial_link');
-?>
-<div class="pi-section-w pi-shadow-inside-top pi-section-dark">
-    <div class="pi-texture" style="background: url(<?php echo get_template_directory_uri(); ?>/img/hexagon.png) repeat;"></div>
-    <div class="pi-section pi-padding-top-50 pi-padding-bottom-30">
-
-        <!-- Row -->
-        <div class="pi-row">
-
-            <!-- Col 9 -->
-            <div class="pi-col-sm-9 pi-center-text-xs">
-                <h3 class="pi-weight-300"><?= $free_trial_title ?></h3>
-
-                <p class="lead-16"><?= $free_trial_text ?></p>
-            </div>
-            <!-- End col 9 -->
-
-            <div class="pi-clearfix pi-visible-xs"></div>
-
-            <!-- Col 3 -->
-            <div class="pi-col-sm-3 pi-text-right pi-center-text-xs">
-                <p class="pi-margin-top-5">
-                    <a href="<?= $free_trial_link ?>" class="btn pi-btn-base pi-btn-no-border pi-btn-big">
-                        Free Trial
-                    </a>
-                </p>
-            </div>
-            <!-- End col 3 -->
-
-        </div>
-        <!-- End row -->
-
-    </div>
-</div>
+<?php echo do_shortcode('[FreeTrial color="black"]'); ?>
 <!-- - - - - - - - - - END SECTION - - - - - - - - - -->
-
-
-
 
 
 <!-- - - - - - - - - - SECTION - - - - - - - - - -->
 <div class="pi-section-w pi-section-white piCounter">
     <div class="pi-section pi-padding-bottom-30">
-
-        <h2 class="h4 pi-weight-700 pi-uppercase pi-letter-spacing pi-has-bg pi-margin-bottom-30">
-            What We Offer
-        </h2>
-
+        <h2 class="h4 pi-weight-700 pi-uppercase pi-letter-spacing pi-has-bg pi-margin-bottom-30">What We Offer</h2>
         <!-- Row -->
         <div class="pi-row">
-
             <?php
             $args = array(
                 'post_type' => 'what_we_offer',
@@ -96,9 +52,7 @@ $free_trial_link = get_option('free_trial_link');
                                 <a href="<?= the_permalink(); ?>">More info<i class="icon-right-open-mini pi-icon-right"></i></a>
                             </p>
                         </div>
-
                     </div>
-
                 </div>
                 <!-- End col 4 -->
 
@@ -108,7 +62,6 @@ $free_trial_link = get_option('free_trial_link');
                     <div class="pi-clearfix pi-visible-xs"></div>
                     <?php
                 }
-
             endwhile;
             ?>
         </div>
@@ -121,8 +74,6 @@ $free_trial_link = get_option('free_trial_link');
 
         <!-- Portfolio gallery -->
         <div class="recent_work pi-row pi-liquid-col-xs-3 pi-gallery pi-padding-bottom-20">
-
-
             <?php
             $args = array(
                 'post_type' => 'recent_work',
@@ -154,11 +105,8 @@ $free_trial_link = get_option('free_trial_link');
                 <?php
             endwhile;
             ?>
-
         </div>
         <!-- End portfolio gallery -->
-
-
     </div>
 </div>
 <!-- - - - - - - - - - END SECTION - - - - - - - - - -->

@@ -121,6 +121,7 @@ while (have_posts()) : the_post();
                         ?>
                         <?php
                     endwhile;
+                    wp_reset_postdata();
                     ?>
                 </div>
             </div>
@@ -128,6 +129,9 @@ while (have_posts()) : the_post();
     </main>
 
     <?php
+    if (has_excerpt($post->ID)) {
+        the_excerpt();
+    }
 endwhile;
 ?>    
 <?php get_footer(); ?>
