@@ -375,7 +375,7 @@ while (have_posts()) : the_post();
                                     <span class="pi-testimonial-author-photo pi-img-round"><?php the_post_thumbnail('thumbnail'); ?></span>
 
                                     <div>
-                                        <span class="pi-testimonial-author-name"><strong><?php the_title(); ?></strong></span> <br>
+                                        <span class="pi-testimonial-author-name"><strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong></span> <br>
                                         <span class="pi-testimonial-author-company"><?= $designation; ?> <a href="javascript:void(0)"><?= $company_name; ?></a></span>
                                     </div>
                                 </div>

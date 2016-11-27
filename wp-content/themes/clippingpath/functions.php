@@ -16,6 +16,7 @@ register_nav_menus(array(
  * =============================================================================
  */
 include('themeoptions.php');
+include('library/multi-post-thumbnails.php');
 
 
 
@@ -125,8 +126,6 @@ function widget_in_content($atts) {
 
 add_shortcode('widget_shortcode', 'widget_in_content');
 
-
-
 /**
  * =============================================================================
  * To make shortcode for widget.
@@ -134,10 +133,11 @@ add_shortcode('widget_shortcode', 'widget_in_content');
  * Shortcode sample [widget_shortcode id="widget_name"]
  * =============================================================================
  */
-function free_trial_widget($atts){
+function free_trial_widget($atts) {
     $color = $atts['color'];
-    $inter = include('interface_free_trial_'.$color.'.php');
+    $inter = include('interface_free_trial_' . $color . '.php');
 }
+
 add_shortcode('FreeTrial', 'free_trial_widget');
 
 
@@ -182,6 +182,32 @@ add_action('save_post', function($post_id) {
         update_post_meta($post_id, 'class_name', $_POST['class_name']);
     }
 });
+if (class_exists('MultiPostThumbnails')) {
+    new MultiPostThumbnails(array(
+        'label' => '2nd Feature Image',
+        'id' => 'feature-image-2',
+        'post_type' => 'what_we_offer'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '3rd Feature Image',
+        'id' => 'feature-image-3',
+        'post_type' => 'what_we_offer'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '4th Feature Image',
+        'id' => 'feature-image-4',
+        'post_type' => 'what_we_offer'
+            )
+    );
+    new MultiPostThumbnails(array(
+        'label' => '5th Feature Image',
+        'id' => 'feature-image-5',
+        'post_type' => 'what_we_offer'
+            )
+    );
+}
 
 /**
  * =============================================================================
@@ -292,7 +318,6 @@ add_action('init', function() {
     ));
 });
 
-require_once('library/multi-post-thumbnails.php');
 if (class_exists('MultiPostThumbnails')) {
     new MultiPostThumbnails(array(
         'label' => '2nd Feature Image',
@@ -468,3 +493,25 @@ if (class_exists('MultiPostThumbnails')) {
             )
     );
 }
+
+
+
+
+/**
+ * =============================================================================
+ * To make custom fields for posts.
+ * @post_type post
+ * =============================================================================
+ */
+add_action('add_meta_boxes', function() {
+    add_meta_box(
+            'test_meta_box', __('Youtube Video Link ID', 'post'), 'custom_fld', 'post', 'normal', 'high'
+    );
+});
+
+add_action('save_post', function($post_id) {
+    global $post;
+    if ($post->post_type == 'post') {
+        update_post_meta($post_id, 'youtube_video_id', $_POST['youtube_video_id']);
+    }
+});

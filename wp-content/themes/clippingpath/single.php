@@ -1,48 +1,99 @@
 <?php
 /**
- * The template for displaying all single posts and attachments
+ * The template for displaying pages
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages and that
+ * other "pages" on your WordPress site will use a different template.
  *
  * @package WordPress
- * @subpackage Twenty_Fifteen
- * @since Twenty Fifteen 1.0
+ * @subpackage Clipping Path
+ * @since Clipping Path 1.0
  */
+get_header(); 
 
-get_header(); ?>
-
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-		<?php
-		// Start the loop.
-		while ( have_posts() ) : the_post();
-
-			/*
-			 * Include the post format-specific template for the content. If you want to
-			 * use this in a child theme, then include a file called called content-___.php
-			 * (where ___ is the post format) and that will be used instead.
-			 */
-			get_template_part( 'content', get_post_format() );
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-			// Previous/next post navigation.
-			the_post_navigation( array(
-				'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Next', 'twentyfifteen' ) . '</span> ' .
-					'<span class="screen-reader-text">' . __( 'Next post:', 'twentyfifteen' ) . '</span> ' .
-					'<span class="post-title">%title</span>',
-				'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Previous', 'twentyfifteen' ) . '</span> ' .
-					'<span class="screen-reader-text">' . __( 'Previous post:', 'twentyfifteen' ) . '</span> ' .
-					'<span class="post-title">%title</span>',
-			) );
-
-		// End the loop.
-		endwhile;
-		?>
-
-		</main><!-- .site-main -->
-	</div><!-- .content-area -->
-
+while (have_posts()) : the_post();
+    include('inner_header.php');
+    ?>
+    <!-- - - - - - - - - - SECTION - - - - - - - - - -->
+    <main class="inner_page pricing">
+        <div class="pi-section-w pi-section-white piCounter">
+            <div class="pi-section pi-padding-bottom-30">
+                <div class="pi-row pi-padding-bottom-20">
+                    <?php
+                    if (has_post_thumbnail()) {
+                        ?>
+                        <div class="pi-col-sm-6 pi-padding-bottom-40">
+                            <!-- Slider -->
+                            <div class="pi-slider-wrapper pi-slider-arrows-inside pi-slider-show-arrow-hover">
+                                <div class="pi-slider pi-slider-animate-opacity">
+                                    <div class="pi-slide">
+                                        <div class="pi-img-w pi-img-round-corners pi-img-shadow pi-img-with-overlay">
+                                            <a href="javascript:void(0)"><?php the_post_thumbnail(); ?></a>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    if (has_post_thumbnail()) { // checks if post has a featured image and then outputs it.     
+                                        $image_id = get_post_thumbnail_id($post->ID);
+                                        $image_thumb_url = wp_get_attachment_image_src($image_id, 'small-thumb');
+                                        $attr = array(
+                                            'class' => $post->post_type,
+                                        );
+                                    }
+                                    if (class_exists('MultiPostThumbnails')) {
+                                        $i = 1;
+                                        while ($i <= 5) {
+                                            $image_name = 'feature-image-' . $i;  // sets image name as feature-image-1, feature-image-2 etc.
+                                            if (MultiPostThumbnails::has_post_thumbnail($post->post_type, $image_name)) {
+                                                $image_id = MultiPostThumbnails::get_post_thumbnail_id($post->post_type, $image_name, $post->ID);  // use the MultiPostThumbnails to get the image ID
+                                                $image_thumb_url = wp_get_attachment_image_src($image_id, 'small-thumb');  // define thumb src based on image ID
+                                                $image_feature_url = wp_get_attachment_image_src($image_id, 'feature-image'); // define full size src based on image ID
+                                                $attr = array(
+                                                    'class' => "", // set custom class
+                                                    'rel' => $image_thumb_url[0], // sets the url for the image thumbnails size
+                                                    'src' => $image_feature_url[0], // sets the url for the full image size 
+                                                );
+                                                $image = wp_get_attachment_image($image_id, 'feature-image', false, $attr);
+                                                ?>
+                                                <!-- Slide -->
+                                                <div class="pi-slide">
+                                                    <div class="pi-img-w pi-img-round-corners pi-img-shadow pi-img-with-overlay">
+                                                        <a href="javascript:void(0)"><?= $image ?></a>
+                                                    </div>
+                                                </div>
+                                                <!-- End slide -->
+                                                <?php
+                                            }
+                                            $i++;
+                                        }
+                                    }; // end if MultiPostThumbnails 
+                                    ?>
+                                </div>
+                            </div>
+                            <!-- End slider -->
+                        </div>
+                        <div class="pi-col-sm-6 pi-padding-bottom-40"> 
+                            <?php the_content(); ?>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="pi-col-xs-12 pi-padding-bottom-40"> 
+                            <?php the_content(); ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <?php
+        if (has_excerpt($post->ID)) {
+            the_excerpt();
+        }
+        ?>
+    </main>  
+    <?php
+endwhile;
+?>    
 <?php get_footer(); ?>

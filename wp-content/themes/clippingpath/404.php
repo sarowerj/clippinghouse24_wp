@@ -3,28 +3,36 @@
  * The template for displaying 404 pages (not found)
  *
  * @package WordPress
- * @subpackage Twenty_Fifteen
- * @since Twenty Fifteen 1.0
+ * @subpackage clippingpath
  */
+get_header();
+?>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;subset=latin,cyrillic'
+      rel='stylesheet' type='text/css'/>
 
-get_header(); ?>
+<div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+        <div class="pi-section-w pi-section-white">
+            <div class="pi-section pi-text-center pi-padding-top-120 pi-padding-bottom-100">
+                <p class="pi-weight-700 pi-text-dark pi-404">
+                    404
+                </p>
+                <p class="lead-30 pi-weight-700 pi-uppercase pi-text-dark pi-margin-bottom-10">
+                    <?php _e('Oops! That page can&rsquo;t be found.', 'clippingpath'); ?>
+                </p>
+                <p>
+                    We're sorry, the page you requested cannot be found.<br>
+                    You can go back to
+                </p>
+                <p>
+                    <a href="<?php echo site_url(); ?>" class="btn pi-btn pi-btn-base pi-btn-big-paddings pi-btn-big">
+                        Homepage
+                    </a>
+                </p>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-			<section class="error-404 not-found">
-				<header class="page-header">
-					<h1 class="page-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'twentyfifteen' ); ?></h1>
-				</header><!-- .page-header -->
-
-				<div class="page-content">
-					<p><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'twentyfifteen' ); ?></p>
-
-					<?php get_search_form(); ?>
-				</div><!-- .page-content -->
-			</section><!-- .error-404 -->
-
-		</main><!-- .site-main -->
-	</div><!-- .content-area -->
+            </div>
+        </div>
+    </main><!-- .site-main -->
+</div><!-- .content-area -->
 
 <?php get_footer(); ?>

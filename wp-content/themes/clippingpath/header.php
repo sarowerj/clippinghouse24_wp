@@ -9,9 +9,7 @@
 
         <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/3dParty/bootstrap/css/bootstrap.min.css"/>
 
-        <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/global.css"/>
-
-        <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/3dParty/rs-plugin/css/pi.settings.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/global.css"/> 
 
         <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/typo.css"/>
 
@@ -25,7 +23,7 @@
 
         <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/social.css"/>
 
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/pricing-tables.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/pricing-tables.css" />
 
 
         <!--Fonts-->
@@ -47,6 +45,7 @@
         $phone_no_1 = get_option('phone_no_1');
         $logo_url = get_option('logo_url');
         $admin_email = get_option('admin_email');
+        $skype = get_option('skype');
         ?>
         <div id="pi-all">
 
@@ -60,8 +59,8 @@
                         <!-- Phone -->
                         <?php if (!empty($phone_no_1)) { ?>
                             <div class="pi-row-block pi-row-block-txt">
-                                <i class="pi-row-block-icon icon-phone pi-icon-base pi-icon-square"></i>Call Us:
-                                <strong><a href="tel:<?= $phone_no_1 ?>"><?= $phone_no_1 ?> </a></strong>
+                                <i class="pi-row-block-icon icon-skype pi-icon-base pi-icon-square"></i>Skype:
+                                <strong><a href="skype::<?= $skype ?>?call"><?= $skype ?> </a></strong>
                             </div>
                             <?php
                         }
@@ -88,7 +87,7 @@
                         <!-- Logo -->
                         <div class="pi-row-block pi-row-block-logo pi-center-text-xs-only" style="margin-right: 20px;">
                             <a href="<?= esc_url(home_url('/')); ?>"> 
-                                <img src="<?php echo ($logo_url == '') ? esc_url(get_template_directory_uri()) . '/images/cphouse_logo_main.png' : $logo_url ?>" alt="" />
+                                <img src="<?php echo ($logo_url == '') ? esc_url(get_template_directory_uri()) . '/img/cphouse_logo_main.png' : $logo_url ?>" alt="" />
                             </a>
                         </div>
                         <!-- End logo --> 

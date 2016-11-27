@@ -24,6 +24,12 @@
                     <td width="350"><input type="text" name="company_name" id="class_name" value="<?php echo get_post_meta($post->ID, 'company_name', true); ?>" /></td>
                 </tr>
             <?php } ?>
+            <?php if ($post->post_type == 'post') { ?>
+                <tr>
+                    <td width="150"><label for="youtube_video_id">Youtube Video Link ID</label></td>
+                    <td width="350"><input type="text" name="youtube_video_id" id="class_name" value="<?php echo get_post_meta($post->ID, 'youtube_video_id', true); ?>" /></td>
+                </tr>
+            <?php } ?>
         </table>
     </div> 
 </form>

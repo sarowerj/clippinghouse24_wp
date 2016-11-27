@@ -110,3 +110,9 @@ and open the template in the editor.
 .pi-testimonial-author .pi-testimonial-author-photo img{
     max-width:70px;
 }
+
+.powered_by_text{
+    text-align: center;
+    border-top: 1px solid #2e343a;
+    padding:15px 0 15px 0;
+}

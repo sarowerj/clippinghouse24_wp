@@ -95,7 +95,7 @@ $facebook = get_option('facebook');
                         ?>
                         <li>
                             <span class="pi-bullet-icon"><i class="icon-skype"></i></span>
-                            <strong>Skype:</strong> <a href="callto:<?=$skype?>"><?=$skype?></a>
+                            <strong>Skype:</strong> <a href="callto:<?= $skype ?>"><?= $skype ?></a>
                         </li>
                         <?php
                     }
@@ -115,8 +115,8 @@ $facebook = get_option('facebook');
                 </h6>
 
                 <!-- Contact form -->
-                <?php 
-                    echo do_shortcode('[contact-form-7 id="8" title="Footer Contact"]');
+                <?php
+                echo do_shortcode('[contact-form-7 id="8" title="Footer Contact"]');
                 ?>
                 <!-- End contact form -->
 
@@ -165,7 +165,7 @@ $facebook = get_option('facebook');
 
         <div class="pi-row-block pi-row-block-logo pi-row-block-bordered">
             <a href="<?php echo esc_url(home_url('/')); ?>"> 
-                <img src="<?php echo ($footer_logo_url == '') ? esc_url(get_template_directory_uri()) . '/images/cphouse_logo_dark.png' : $footer_logo_url ?>" alt="" />
+                <img src="<?php echo ($footer_logo_url == '') ? esc_url(get_template_directory_uri()) . '/img/cphouse_logo_dark.png' : $footer_logo_url ?>" alt="" />
             </a>
         </div>
         <!-- End footer logo -->
@@ -178,7 +178,13 @@ $facebook = get_option('facebook');
         <!-- End text -->
 
     </div>
+    <div class="pi-section pi-row-lg pi-center-text-2xs pi-clearfix">
+        <div class="powered_by_text">
+            Powerd by <a href="http://www.sarower.me" target="_blank">Sarower jahan</a>
+        </div>
+    </div>
 </div>
+
 <!-- End copyright area -->
 <!-- End footer -->
 

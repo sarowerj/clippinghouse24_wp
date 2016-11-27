@@ -96,10 +96,7 @@ echo do_shortcode('[rev_slider main_slider]');
                             </div>
                         </a>
                     </div>
-                    <h3 class="h6 pi-weight-700 pi-uppercase pi-letter-spacing pi-margin-bottom-5"><a href="#" class="pi-link-dark">Bread and spikes</a></h3>
-                    <ul class="pi-meta">
-                        <li><i class="icon-tag"></i><a href="javascript:void(0)"><?php echo get_the_excerpt(); ?></a></li>
-                    </ul>
+                    <h3 class="h6 pi-weight-700 pi-uppercase pi-letter-spacing pi-margin-bottom-5"><a href="<?php the_permalink(); ?>" class="pi-link-dark">Bread and spikes</a></h3>
                 </div>
                 <!-- End portfolio item -->
                 <?php
@@ -152,7 +149,7 @@ echo do_shortcode('[rev_slider main_slider]');
                                     </i>
                                 </p>
                                 <p class="lead-18 pi-weight-700 pi-text-white pi-uppercase pi-letter-spacing pi-margin-bottom-5">
-                                    <?= the_title(); ?>
+                                    <a href="<?php the_permalink(); ?>"><?= the_title(); ?></a>
                                 </p>
                                 <p class="pi-italic">
                                     <?=$designation ?> <a href="#"><?=$company_name?></a>
